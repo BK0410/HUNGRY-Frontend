@@ -1,0 +1,350 @@
+<div class="backgroundimage">
+
+    <div class="top">
+        <div class="homeLink">
+            <a routerLink="/home">H U N G R Y</a>
+        </div>
+
+        <div class="loginLink">
+            <ul>
+                <li><a (click)="scroll(Users)">Users</a></li>
+                <li><a (click)="scroll(Categories)">Categories</a></li>
+                <li><a (click)="scroll(Restaurants)">Restaurants</a></li>
+                <li><a (click)="scroll(Dishes)">Dishes</a></li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <img src="assets/images/background.jpg" style="height: 100vh; width: 100vw; object-fit:cover;">
+    <div class="text-block">
+        <div class="logo">
+
+            <div class="heading">
+                <h1 style="margin-top: 20px; font-size: 40px;">H U N G R Y</h1>
+            </div>
+        </div>
+        <h2 style="font-size: 23px; margin-top: 10px;"><strong>HALT YOUR HUNGER BY ORDERING HERE</strong></h2>
+
+        <div class="cuisineheading">
+            <strong>
+                <h2>Welcome ADMIN !</h2>
+            </strong>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="break" #Users>
+
+    - USERS -
+
+</div>
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">ID</th>
+                <th scope="col" style="text-align: center;">First_Name</th>
+                <th scope="col" style="text-align: center;">Last_Name</th>
+                <th scope="col" style="text-align: center;">Email_ID</th>
+                <th scope="col" style="text-align: center;">Delivery_Address</th>
+                <th scope="col" style="text-align: center;">Edits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <th scope="row" style="text-align: center;" class="align-middle">{{user.id}}</th>
+                <td style="text-align: center;" class="align-middle">{{user.First_Name}}</td>
+                <td style="text-align: center;" class="align-middle">{{user.Last_Name}}</td>
+                <td style="text-align: center;" class="align-middle">{{user.Email_ID}}</td>
+                <td style="text-align: center;" class="align-middle">{{user.Address_Line1}} {{user.Address_Line2}}
+                    {{user.City_Pincode}}</td>
+                <td style="text-align: center;" class="align-middle">
+                    <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="break" #Categories>
+
+    - CATEGORIES -
+
+</div>
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">ID</th>
+                <th scope="col" style="text-align: center;">Category</th>
+                <th scope="col" style="text-align: center;">Edits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories">
+                <th scope="row" style="text-align: center;" class="align-middle">{{category.id}}</th>
+                <td style="text-align: center;" class="align-middle">{{category.CategoryName}}</td>
+                <td style="text-align: center;" class="align-middle">
+                    <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+<div id="loginform" class="container mt-2" style="text-align:center; width: 50%;">
+    <form [formGroup]="addCategoryForm">
+
+        <div class="col-lg-13 mt-3">
+            <input type="text" class="form-control" formControlName="CategoryName" placeholder="Enter Category Name">
+        </div>
+
+        <div class="button">
+            <button (click)="addCategory()">Add New Category</button>
+        </div>
+
+    </form>
+</div>
+
+<div class="break" #Restaurants>
+
+    - RESTAURANTS -
+
+</div>
+
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">ID</th>
+                <th scope="col" style="text-align: center;">Restaurants</th>
+                <th scope="col" style="text-align: center;">Cuisine</th>
+                <!-- <th scope="col" style="text-align: center;">Email_ID</th>
+            <th scope="col" style="text-align: center;">Password</th>  -->
+                <th scope="col" style="text-align: center;">Edits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let restaurant of restaurants">
+                <th scope="row" style="text-align: center;" class="align-middle">{{restaurant.id}}</th>
+                <td style="text-align: center;" class="align-middle">{{restaurant.RestaurantName}}</td>
+                <td style="text-align: center;" class="align-middle">{{restaurant.CuisineName}}</td>
+                <!-- <td style="text-align: center;">{{category.Email_ID}}</td>
+            <td style="text-align: center;">{{category.Password}}</td> -->
+                <td style="text-align: center;">
+                    <button class="btn btn-sm btn-warning"
+                        (click)="(display = true) && (getParamid = restaurant.id) && (restaurantName = restaurant.RestaurantName) && (cuisineName = restaurant.CuisineName)"
+                        (click)="scroll(updateRestaurantForm)">Update</button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-danger" (click)="deleteRestaurant(restaurant.id)">Delete</button>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div #updateRestaurantForm>
+        <div id="loginform" class="container mt-2" style="text-align:center; width: 50%;" *ngIf="display">
+            <form [formGroup]="addRestaurantForm">
+
+                <div class="col-lg-13 mt-3">
+                    <input type="text" class="form-control" formControlName="RestaurantName" [ngModel]="restaurantName">
+                </div>
+
+                <select class="custom-select mt-3" formControlName="CuisineName">
+                    <option value="" class="form-control">{{cuisineName}}</option>
+                    <option *ngFor="let category of categories" [ngValue]="category.CategoryName">
+                        <p>{{ category.CategoryName }}</p>
+                    </option>
+                </select>
+
+                <div class="button">
+                    <button (click)="updateRestaurant()">Update Restaurant</button>
+                    <br>
+                    <button (click)="display=false">To add new restaurant, Click here</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div id="loginform" class="container mt-2" style="text-align:center; width: 50%;" *ngIf="!display">
+    <form [formGroup]="addRestaurantForm">
+
+        <div class="col-lg-13 mt-3">
+            <input type="text" class="form-control" formControlName="RestaurantName"
+                placeholder="Enter Restaurant Name">
+        </div>
+
+        <select class="custom-select mt-3" formControlName="CuisineName">
+            <option value="" class="form-control">--Choose Cuisine--</option>
+            <option *ngFor="let category of categories" [ngValue]="category.CategoryName">
+                <p>{{ category.CategoryName }}</p>
+            </option>
+        </select>
+
+        <div class="button">
+            <button (click)="addRestaurant()">Add Restaurant</button>
+        </div>
+
+    </form>
+</div>
+
+<div class="break" #Dishes>
+
+    - DISHES -
+
+</div>
+
+<div class="button">
+    <button (click)="scroll(addDishForm1)" (click)="(dishDisplay = false)">Click here to add new Dish</button>
+</div>
+
+<div class="searchbox" style="text-align: center;">
+    <input id="search" type="search" name="search" placeholder="Search for Cuisines" [(ngModel)]="selectedOption"
+        style="margin-top:20px;width: 55%;padding: 7px 7px;padding-left:8px;border-radius: 4px;border:0.5px solid rgba(0, 0, 0, 0.34);font-size:large;color: rgb(67, 33, 23);">
+
+    &nbsp;
+    <select [(ngModel)]="selectedOption" style="width: 20px;">
+        <option *ngFor="let category of categories">
+            {{category.CategoryName}}
+        </option>
+    </select>
+
+</div>
+
+
+<span class="output"></span>
+
+<div class="searchbox" style="text-align: center;">
+    <input id="search" type="search" name="searchWord" [(ngModel)]="searchWord" placeholder="Search for Restaurants"
+        style="margin-top:20px;width: 55%;padding: 7px 7px;padding-left:8px;border-radius: 4px;border:0.5px solid rgba(0, 0, 0, 0.34);font-size:large;color: rgb(67, 33, 23);">
+
+    &nbsp;
+    <select [(ngModel)]="searchWord" style="width: 20px;">
+        <option *ngFor="let restaurant of restaurants" [value]="restaurant.RestaurantName">
+            - {{restaurant.CuisineName}} - {{restaurant.RestaurantName}}
+        </option>
+    </select>
+</div>
+
+
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">ID</th>
+                <th scope="col" style="text-align: center;">Cuisine</th>
+                <th scope="col" style="text-align: center;">Restaurant</th>
+                <th scope="col" style="text-align: center;">Dishes</th>
+                <th scope="col" style="text-align: center;">Price</th>
+                <th scope="col" style="text-align: center;">Edits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dish of dishes | filter:selectedOption | filter:searchWord">
+                <th scope="row" style="text-align: center;" class="align-middle">{{dish.id}}</th>
+                <td style="text-align: center;" class="align-middle">{{dish.CuisineName}}</td>
+                <td style="text-align: center;" class="align-middle">{{dish.HotelName}}</td>
+                <td style="text-align: center;" class="align-middle">{{dish.Dishes}}</td>
+                <td style="text-align: center;" class="align-middle">{{dish.Price}}</td>
+                <td style="text-align: center;" class="align-middle">
+                    <button class="btn btn-sm btn-warning"
+                        (click)="(dishDisplay = true) && (getParamid = dish.id) && (restaurantName = dish.HotelName) && (cuisineName = dish.CuisineName) && (dishName = dish.Dishes) && (price = dish.Price)" (click)="scroll(updateDishForm1)" (click)="updatefn()">Update</button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-danger" (click)="deleteDish(dish.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+
+
+    </table>
+
+    <div #updateDishForm1>
+        <div id="loginform" class="container mt-2" style="text-align:center; width: 50%;" *ngIf="dishDisplay">
+            <form [formGroup]="updateDishForm">
+
+                <div class="col-lg-13 mt-3">
+                    <input type="text" class="form-control" formControlName="DishName" [ngModel]="dishName">
+                </div>
+
+                <select class="custom-select mt-3" formControlName="CuisineName">
+                    <option value="" class="form-control">{{cuisineName}}</option>
+                    <option *ngFor="let category of categories" [value]="cuisineName">
+                        <p>{{ category.CategoryName }}</p>
+                    </option>
+                </select>
+
+                <select class="custom-select mt-3" formControlName="RestaurantName">
+                    <option value="" class="form-control">{{restaurantName}}</option>
+                    <option *ngFor="let restaurant of restaurants" [value]="restaurantName">
+                        <p> - {{restaurant.CuisineName}} - {{ restaurant.RestaurantName }}</p>
+                    </option>
+                </select>
+
+                <div class="col-lg-13 mt-3">
+                    <input type="number" class="form-control" formControlName="Price" [ngModel]="price">
+                </div>
+
+                <div class="button">
+                    <button (click)="updateDish()">Update Dish</button>
+                    <br>
+                    <button (click)="dishDisplay=false">To add new dish, Click here</button>
+                </div>
+
+                
+
+            </form>
+        </div>
+    </div>
+
+    <div #addDishForm1></div>
+    <div id="loginform" class="container mt-2" style="text-align:center; width: 50%;" *ngIf="!dishDisplay">
+        <form [formGroup]="addDishForm">
+
+            <div class="col-lg-13 mt-3">
+                <input type="text" class="form-control" formControlName="DishName" placeholder="Enter Dish Name">
+            </div>
+
+            <select class="custom-select mt-3" formControlName="CuisineName">
+                <option value="" class="form-control">--Choose Cuisine--</option>
+                <option *ngFor="let category of categories" [ngValue]="category.CategoryName">
+                    <p>{{ category.CategoryName }}</p>
+                </option>
+            </select>
+
+            <select class="custom-select mt-3" formControlName="RestaurantName">
+                <option value="" class="form-control">--Choose Restaurant--</option>
+                <option *ngFor="let restaurant of restaurants" [ngValue]="restaurant.RestaurantName">
+                    <p> - {{restaurant.CuisineName}} - {{ restaurant.RestaurantName }}</p>
+                </option>
+            </select>
+
+            <div class="col-lg-13 mt-3">
+                <input type="text" class="form-control" formControlName="Price" placeholder="Enter Price">
+            </div>
+
+            <div class="button">
+                <button (click)="addDish()">Add Dish</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

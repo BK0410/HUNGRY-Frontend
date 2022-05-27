@@ -1,0 +1,115 @@
+<div class="backgroundimage">
+
+    <div class="top">
+        <div class="homeLink">
+            <a routerLink="/home">H U N G R Y</a>
+        </div>
+
+        <div class="loginLink">
+            <ul>
+                <li id="myorders"><a routerLink="/myOrders">My Orders</a></li>
+                <li id="ordernow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="deliveryaddress"><a routerLink="/deliveryaddress">Delivery Address</a></li>
+                <li id="cart"><a routerLink="/cart">Cart <span class="badge badge-dark"
+                            style="color:orangered;background-color: white; padding-bottom:1px;">{{count}}</span></a>
+                </li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mediatop">
+        <a id="cart" routerLink="/cart" style="margin-right: 1.5em;">Cart <span class="badge badge-dark"
+                style="color:orangered;background-color: white; font-size: 12px;padding-top: 4px;">{{count}}</span></a>
+        <i class="material-icons" (click)="menudisplay = !menudisplay">
+            menu
+        </i>
+
+
+        <div class="menu" *ngIf="menudisplay">
+            <ul>
+                <li id="myorders"><a routerLink="/myOrders">My Orders</a></li>
+                <li id="ordernow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="deliveryaddress"><a routerLink="/deliveryaddress">Delivery Address</a></li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <img src="assets/images/background.jpg" style="height: 100vh; width: 100vw; object-fit:cover;">
+    <div class="text-block" *ngIf="display">
+        <div class="logo">
+
+            <div class="heading">
+                <h1 style="margin-top: 20px; font-size: 40px;">H U N G R Y </h1>
+
+            </div>
+        </div>
+
+        <h2><strong>HALT YOUR HUNGER BY ORDERING HERE</strong></h2>
+        <div *ngIf="tokendisplay">
+            <h2 style="color:orangered;font-size: 23px; margin-top: 10px;"><strong>OOPS :( You haven't made your First
+                    Order yet</strong></h2>
+
+            <div class="col-lg-13 mt-3" style="margin-bottom: 15px;">
+                <button routerLink="../userPage" class="btn btn-primary btn-sm"
+                    style="background-color:orangered;border: 5px solid orangered;border-radius: 10px;"><strong>ORDER
+                        NOW</strong></button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="text-block2" *ngIf="!display">
+
+
+        <ng-container *ngFor="let category of categories">
+            <div class="categories">
+                <div class="category">
+
+                    <div class="foodimg">
+                        <img src="assets/images/cart2.png" alt="">
+                        <br>
+                        <span><strong>{{category[0]}}</strong></span>
+                    </div>
+
+                    <div class="dishes">
+                        <div class="dishnames">
+                            <ng-container *ngFor="let dish of category[2]">
+                                {{dish}} 
+                                <br>
+                                <br>
+                            </ng-container>
+                        </div>
+                        <div>
+                            <ng-container *ngFor="let dish of category[2]">
+                                X <br> <br>
+                            </ng-container>
+                        </div>
+                        <div class="quantity">
+                            <ng-container *ngFor="let quantity of category[3]">
+                                {{quantity}}
+                                <br>
+                                <br>
+                            </ng-container>
+                        </div>
+
+                    </div>
+
+                    <div class="restaurant">
+                        <strong>{{category[5]}}</strong>
+                    </div>
+
+                    <div class="totalprice">
+                        <strong>Rs.{{category[6]}}</strong>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+
+</div>

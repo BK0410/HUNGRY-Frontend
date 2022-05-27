@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {Title} from "@angular/platform-browser";
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+
+  constructor(private titleService:Title) {
+    this.titleService.setTitle("H U N G R Y");
+  }
+
+  title = 'HUNGRY';
+  onActivate() {
+    window.scroll(0,0);}
+    
 }

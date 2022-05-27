@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans','Orbitron', sans-serif;
+}
+* h1,.homeLink a{
+    font-family:'Orbitron', sans-serif;
+}
+h2{
+    word-spacing: 0.2em ;
+  }
+a{
+    text-decoration: none;
+}
+

@@ -1,0 +1,145 @@
+<div class="backgroundimage">
+
+    <div class="top">
+        <div class="homeLink">
+            <a routerLink="/home">H U N G R Y</a>
+        </div>
+
+        <div class="loginLink">
+            <ul>
+                <li id="myorders"><a routerLink="/myOrders">My Orders</a></li>
+                <li id="ordernow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="deliveryaddress"><a routerLink="/deliveryaddress">Delivery Address</a></li>
+                <li id="cart"><a routerLink="/cart">Cart <span class="badge badge-dark"
+                            style="color:orangered;background-color: white; padding-bottom:1px;">{{count}}</span></a>
+                </li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mediatop">
+        <a id="cart" routerLink="/cart" style="margin-right: 1.5em;">Cart <span class="badge badge-dark"
+                style="color:orangered;background-color: white; font-size: 12px;padding-top: 4px;">{{count}}</span></a>
+        <i class="material-icons" (click)="menudisplay = !menudisplay">
+            menu
+        </i>
+
+
+        <div class="menu" *ngIf="menudisplay">
+            <ul>
+                <li id="myorders"><a routerLink="/myOrders">My Orders</a></li>
+                <li id="ordernow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="deliveryaddress"><a routerLink="/deliveryaddress">Delivery Address</a></li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <img src="assets/images/background.jpg" style="height: 100vh; width: 100vw; object-fit:cover;">
+    <div class="text-block" *ngIf="display">
+        <div class="logo">
+
+            <div class="heading">
+                <h1 style="margin-top: 20px; font-size: 40px;">H U N G R Y </h1>
+
+            </div>
+        </div>
+        <h2><strong>HALT YOUR HUNGER BY ORDERING HERE</strong></h2>
+        <h2 style="color:orangered;font-size: 23px; margin-top: 10px;"><strong>YOUR CART IS EMPTY</strong></h2>
+
+        <div class="col-lg-13 mt-3" style="margin-bottom: 15px;">
+            <button routerLink="../userPage" class="btn btn-primary btn-sm"
+                style="background-color:orangered;border: 5px solid orangered;border-radius: 10px;"><strong>ORDER
+                    NOW</strong></button>
+        </div>
+
+        <!-- <div id="loginform" class="container mt-5" style="text-align:center; margin-bottom: 10px;">
+            <form>
+    
+                <div class="col-lg-14 mt-3">
+                    <input type="email" class="form-control" formControlName="Email_ID" placeholder="Enter Email_ID">
+                </div>
+    
+                <div class="col-lg-14 mt-3">
+                    <input type="password" class="form-control" formControlName="Password" placeholder="Enter Password">
+                </div>
+    
+                <div class="col-lg-14 mt-3">
+                    <button class="btn btn-primary btn-sm" style="background-color:orangered;border: 5px solid orangered;border-radius: 10px;">Login</button>
+                </div>
+    
+            </form>
+        </div> -->
+
+    </div>
+
+    <div *ngIf="!paymentDisplay">
+        <div class="text-block2" *ngIf="!display">
+            <ng-container *ngFor="let item of keyvalue">
+                <div class="categories">
+                    <div class="category">
+                        <div class="foodimg">
+                            <img src="assets/images/cart2.png" alt="">
+                        </div>
+                        <div class="fooddetails">
+                            <div class="keys">
+                                <span id="dish"><strong>Dish:</strong> {{item[0]}}</span>
+                                <span id="quantity"><strong>Quantity:</strong> {{item[1]}}</span>
+                                <span id="restaurant"><strong>Restaurant:</strong> {{item[3]}}</span>
+                                <span id="price"><strong>Price:</strong> Rs.{{item[2]}}</span>
+                            </div>
+                            <!-- <div class="values">
+                                <span id="dish">{{item[0]}}</span>
+                                <span id="quantity">{{item[1]}}</span>
+                                <span id="restaurant">{{item[3]}}</span>
+                                <span id="Price">Rs.{{item[2]}}</span>
+                            </div> -->
+
+                        </div>
+                        <div class="addremove">
+                            <p id="subtract" (click)="subtract(item[0],item[2],item[1],item[3])">-</p>
+                            <p id="count">{{item[1]}}</p>
+                            <p id="add" (click)="add(item[0],item[2],item[1],item[3])">+</p>
+                        </div>
+                        <div class="delete">
+                            <i class="material-icons" (click)="deleteitem(item[0],item[2])">
+                                delete
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <br>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="payment" *ngIf="paymentDisplay">
+        <div class="text-block4">
+            <span>
+                <h2>Rs.{{totalprice}}</h2>
+            </span>
+            <div class="button">
+                <button (click)="paymentDisplay = false">Cancel</button> <button (click)="paymentfn()">Pay</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div *ngIf="!paymentDisplay">
+        <div class="text-block3" *ngIf="!display">
+            <div class="heading" (click)="confirmfunction()">
+                <h4>Total Amount: Rs.{{totalprice}} <button (click)="checkoutfunction()"
+                        [disabled]="!confirmdisplay">Proceed to Pay</button></h4>
+                <span *ngIf="!confirmdisplay" style="color: orangered;"> <strong>OOPS :( Cannot order from more than one
+                        restaurant at a time</strong></span>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="backgroundimage">
+
+    <div class="top">
+        <div class="homeLink">
+            <a routerLink="/home">H U N G R Y</a>
+        </div>
+
+        <div class="loginLink">
+            <ul>
+                <li id="myorders"><a routerLink="/myOrders">My Orders</a></li>
+                <li id="ordernow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="deliveryaddress"><a routerLink="/deliveryaddress">Delivery Address</a></li>
+                <li id="cart"><a routerLink="/cart">Cart</a></li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mediatop">
+        <!-- <a id="cart" routerLink="/cart" style="margin-right: 1.5em;">Cart <span class="badge badge-dark"
+                style="color:orangered;background-color: white; font-size: 12px;padding-top: 4px;">{{count}}</span></a> -->
+        <i class="material-icons" (click)="menudisplay = !menudisplay">
+            menu
+        </i>
+
+
+        <div class="menu" *ngIf="menudisplay">
+            <ul>
+                <li id="myorders"><a routerLink="/myOrders">My Orders</a></li>
+                <li id="ordernow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="deliveryaddress"><a routerLink="/deliveryaddress">Delivery Address</a></li>
+                <li><a routerLink="/login" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <img src="assets/images/restaurant.jpg" style="height: 100vh; width: 100vw; object-fit:cover;">
+    <div class="text-block">
+        <div class="logo">
+
+            <div class="heading">
+                <h1 style="margin-top: 20px; font-size: 40px;">H U N G R Y</h1>
+            </div>
+        </div>
+        <h2><strong>HALT YOUR HUNGER BY ORDERING HERE</strong></h2>
+
+        <div class="cuisineheading">
+            <strong>
+                <h2 style="letter-spacing: 0.1em;">RESTAURANTS</h2>
+            </strong>
+        </div>
+        <!-- <div id="loginform" class="container mt-5" style="text-align:center; margin-bottom: 10px;">
+            <form>
+    
+                <div class="col-lg-14 mt-3">
+                    <input type="email" class="form-control" formControlName="Email_ID" placeholder="Enter Email_ID">
+                </div>
+    
+                <div class="col-lg-14 mt-3">
+                    <input type="password" class="form-control" formControlName="Password" placeholder="Enter Password">
+                </div>
+    
+                <div class="col-lg-14 mt-3">
+                    <button class="btn btn-primary btn-sm" style="background-color:orangered;border: 5px solid orangered;border-radius: 10px;">Login</button>
+                </div>
+    
+            </form>
+        </div> -->
+
+        <div class="searchbox">
+            <input type="text" name="search" [(ngModel)]="searchText" placeholder="Search for Restaurants"
+                style="width: 100%;padding: 7px 7px;padding-left:8px;border-radius: 4px;border: none;font-size:large;color: rgb(67, 33, 23);">
+
+        </div>
+    </div>
+
+</div>
+
+<div class="break">
+
+    - ORDER NOW -
+
+</div>
+
+<div class="categories-wrapper">
+    <div class="categories">
+        <div class="category" *ngFor="let restaurant of restaurants | filter:searchText">
+            <img src="assets/images/{{restaurant.RestaurantName}}.jpg" alt="RestaurantName">
+            <br>
+            <h3>
+                <span class="hotelName" routerLink="../{{restaurant.CuisineName}}">
+                    {{restaurant.RestaurantName}}
+                </span> <br>
+                <span class="CuisineName" routerLink="../{{restaurant.CuisineName}}">
+                    Serves <strong style="text-transform: uppercase;">{{restaurant.CuisineName}}</strong> Cuisine
+                </span>
+            </h3>
+        </div>
+    </div>
+</div>

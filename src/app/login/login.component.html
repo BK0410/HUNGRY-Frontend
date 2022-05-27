@@ -1,0 +1,63 @@
+<div class="backgroundimage">
+
+    <div class="top">
+        <div class="homeLink">
+            <a routerLink="/home">H U N G R Y</a>
+        </div>
+
+        <div class="loginLink">
+            <ul>
+                <li id="userPage"><a routerLink="/userPage">Order Now</a></li>
+                <li id="login"><a routerLink="/login">Login</a></li>
+                <li id="signup"><a routerLink="/signup">SignUp</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mediatop">
+        <i class="material-icons" (click)="menudisplay = !menudisplay">
+            menu
+        </i>
+
+        <div class="menu" *ngIf="menudisplay">
+            <ul>
+                <li id="orderNow"><a routerLink="/userPage">Order Now</a></li>
+                <li id="login"><a routerLink="/login">Login</a></li>
+                <li id="signup"><a routerLink="/signup">SignUp</a></li>                
+            </ul>
+        </div>
+        
+    </div>
+
+    <img src="assets/images/background.jpg" style="height: 100vh; width: 100vw; object-fit:cover;">
+    <div class="text-block">
+        <div class="logo">
+
+            <div class="heading">
+                <h1 style="margin-top: 20px; font-size: 40px;">H U N G R Y</h1>
+            </div>
+        </div>
+        <h2><strong>HALT YOUR HUNGER BY ORDERING HERE</strong></h2>
+
+        <div id="loginform" class="container mt-1" style="text-align:center; margin-bottom: 10px;">
+            <form [formGroup]="loginForm"> 
+    
+                <div class="col-lg-13 mt-3">
+                    <input type="email" class="form-control" formControlName="Email_ID" placeholder="Enter Email_ID">
+                </div>
+    
+                <div class="col-lg-13 mt-3">
+                    <input type="password" class="form-control" formControlName="Password" placeholder="Enter Password">
+                </div>
+    
+                <div class="col-lg-13 mt-3">
+                    <button (click)="login()" class="btn btn-primary btn-sm" style="background-color:orangered;border: 5px solid orangered;border-radius: 10px;"><strong>LOG-IN</strong></button>
+                </div>
+    
+            </form>
+        </div>
+
+    </div>
+
+    
+</div>
