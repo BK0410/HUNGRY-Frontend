@@ -14,9 +14,7 @@ export class NotfoundComponent implements OnInit {
   ngOnInit(): void {
     var token:any = localStorage.getItem('token');
     var base64Payload = token.split('.')[1];
-    console.log(base64Payload)
     var payload1:any = Buffer.from(base64Payload, 'base64');
-    console.log(JSON.parse(payload1))
     if(JSON.parse(payload1).role === "ADMIN"){
       this.router.navigate(['admin'])
     }

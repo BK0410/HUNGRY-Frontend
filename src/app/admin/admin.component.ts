@@ -29,34 +29,34 @@ export class AdminComponent implements OnInit {
   constructor(private userSer: BackendService, private router: Router, private router2: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log("================="+this.searchText)
+    //.log("================="+this.searchText)
 
     var token:any = localStorage.getItem('token');
     var base64Payload = token.split('.')[1];
-    console.log(base64Payload)
+    //.log(base64Payload)
     var payload1:any = Buffer.from(base64Payload, 'base64');
-    console.log(JSON.parse(payload1))
+    //.log(JSON.parse(payload1))
     if(JSON.parse(payload1).role === "USER"){
       this.router.navigate(['not-found'])
     }
 
     this.userSer.getFoodTable().subscribe((res) => {
-      console.log(res, "res==>");
+      //.log(res, "res==>");
       this.dishes = res
     })
 
     this.userSer.getUsers().subscribe((res) => {
-      console.log(res, "res==>");
+      //.log(res, "res==>");
       this.users = res
     })
 
     this.userSer.getCategories().subscribe((res) => {
-      console.log(res, "res==>");
+      //.log(res, "res==>");
       this.categories = res
     })
 
     this.userSer.getRestaurants().subscribe((res) => {
-      console.log(res, "res==>");
+      //.log(res, "res==>");
       this.restaurants = res
     })
 
@@ -86,12 +86,12 @@ export class AdminComponent implements OnInit {
     this.count = this.count + 1;
     this.userSer.getSingleUser().subscribe((res) => {
       var cart = new Map<string, any>();
-      console.log(cart)
-      console.log(res, "res==>");
+      //.log(cart)
+      //.log(res, "res==>");
       for (let value in res.cart) {
         cart.set(value, res.cart[value])
       }
-      console.log(cart)
+      //.log(cart)
 
 
       if (cart.has(dish)) {
@@ -100,9 +100,9 @@ export class AdminComponent implements OnInit {
       }
       else {
         cart.set(dish, [1, price, restaurant])
-        console.log("new obj")
+        //.log("new obj")
       }
-      console.log(cart)
+      //.log(cart)
       let jsonObject: any = {};
       cart.forEach((value: any, key: any) => {
         jsonObject[key] = value
@@ -162,10 +162,10 @@ export class AdminComponent implements OnInit {
 
 
 updatefn(){
-  console.log(this.restaurantName)
-  console.log(this.dishName)
-  console.log(this.cuisineName)
-  console.log(this.price)
+  //.log(this.restaurantName)
+  //.log(this.dishName)
+  //.log(this.cuisineName)
+  //.log(this.price)
 }
   addCategory() {
     if (this.addCategoryForm.valid) {
@@ -213,7 +213,7 @@ updatefn(){
 
 
   updateRestaurant(){
-    console.log(this.getParamid)
+    //.log(this.getParamid)
     if(this.addRestaurantForm.valid){
       this.userSer.updateRestaurant(this.addRestaurantForm.value,this.getParamid).subscribe((res)=>{
         alert("Restaurant Updated successfully")

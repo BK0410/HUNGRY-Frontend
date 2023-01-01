@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
 
     var token:any = localStorage.getItem('token');
     var base64Payload = token.split('.')[1];
-    console.log(base64Payload)
+    //(base64Payload)
     var payload1:any = Buffer.from(base64Payload, 'base64');
-    console.log(JSON.parse(payload1))
+    //(JSON.parse(payload1))
     if(JSON.parse(payload1).role === "ADMIN"){
       this.router.navigate(['not-found'])
     }
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   setRefreshToken(refreshToken:string) {
-    console.log("+++++++++++++++++" + refreshToken)
+    //("+++++++++++++++++" + refreshToken)
     localStorage.setItem("refreshToken",refreshToken)
   }
 
@@ -63,10 +63,10 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value);
+      //(this.loginForm.value);
       this.userSer.login(this.loginForm.value.Email_ID,this.loginForm.value.Password).subscribe((res)=>{
-        console.log(res,"res=>");
-        // console.log(res.token)
+        //(res,"res=>");
+        // //(res.token)
         this.setToken(res.token);
         this.setRefreshToken(res.refreshToken)
         this.router.navigate(['/userPage']);
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       },
       (err) => {
         alert("Invalid Username or Password");
-        console.log('HTTP Error', err)
+        //('HTTP Error', err)
       }
       )
     }

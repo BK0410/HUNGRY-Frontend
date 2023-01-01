@@ -21,28 +21,28 @@ export class ChineseComponent implements OnInit {
     var token: any = localStorage.getItem('token');
     var refreshToken: any = localStorage.getItem('refreshToken')
     var base64Payload = token.split('.')[1];
-    console.log(base64Payload)
+    //(base64Payload)
     var payload1: any = Buffer.from(base64Payload, 'base64');
-    console.log(JSON.parse(payload1))
+    //(JSON.parse(payload1))
     if (JSON.parse(payload1).role === "ADMIN") {
       this.router.navigate(['not-found'])
     }
 
     const { exp } = JSON.parse(payload1);
     const expired = Date.now() >= exp * 1000
-    console.log("________" + expired)
+    //("________" + expired)
 
     if (expired == true) {
       this.tokendisplay = false
       this.userSer.token(JSON.parse(payload1).Email_ID, refreshToken).subscribe((res) => {
-        console.log("+++++++++++++" + res.token)
+        //("+++++++++++++" + res.token)
         localStorage.setItem('token', res.token)
         window.location.reload()
       })
     }
 
     this.userSer.getFoodTable().subscribe((res) => {
-      console.log(res, "res==>");
+      //(res, "res==>");
       this.categories = res
     })
 
@@ -66,21 +66,21 @@ export class ChineseComponent implements OnInit {
     var token: any = localStorage.getItem('token');
     var refreshToken: any = localStorage.getItem('refreshToken')
     var base64Payload = token.split('.')[1];
-    console.log(base64Payload)
+    //(base64Payload)
     var payload1: any = Buffer.from(base64Payload, 'base64');
-    console.log(JSON.parse(payload1))
+    //(JSON.parse(payload1))
     if (JSON.parse(payload1).role === "ADMIN") {
       this.router.navigate(['not-found'])
     }
 
     const { exp } = JSON.parse(payload1);
     const expired = Date.now() >= exp * 1000
-    console.log("________" + expired)
+    //("________" + expired)
 
     if (expired == true || expired == false) {
       this.tokendisplay = false
       this.userSer.token(JSON.parse(payload1).Email_ID, refreshToken).subscribe((res) => {
-        console.log("+++++++++++++" + res.token)
+        //("+++++++++++++" + res.token)
         localStorage.setItem('token', res.token)
         // alert("Session restored...Please add the dish to cart once again")
         // window.location.reload()
@@ -89,12 +89,12 @@ export class ChineseComponent implements OnInit {
       this.count = this.count + 1;
     this.userSer.getSingleUser().subscribe((res) => {
       var cart = new Map<string, any>();
-      console.log(cart)
-      console.log(res, "res==>");
+      //(cart)
+      //(res, "res==>");
       for (let value in res.cart) {
         cart.set(value, res.cart[value])
       }
-      console.log(cart)
+      //(cart)
 
 
       if (cart.has(dish)) {
@@ -103,9 +103,9 @@ export class ChineseComponent implements OnInit {
       }
       else {
         cart.set(dish, [1, price, restaurant])
-        console.log("new obj")
+        //("new obj")
       }
-      console.log(cart)
+      //(cart)
       let jsonObject: any = {};
       cart.forEach((value: any, key: any) => {
         jsonObject[key] = value

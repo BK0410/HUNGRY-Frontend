@@ -43,10 +43,10 @@ export class AdminhomeComponent implements OnInit {
 
   adminlogin(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value);
+      //(this.loginForm.value);
       this.userSer.adminlogin(this.loginForm.value.Email_ID,this.loginForm.value.Password).subscribe((res)=>{
-        console.log(res,"res=>");
-        // console.log(res.token)
+        //(res,"res=>");
+        // //(res.token)
         this.setToken(res.token);
         this.router.navigate(['/admin']);
         alert("Admin Logged in successfully")
@@ -55,7 +55,7 @@ export class AdminhomeComponent implements OnInit {
       },
       (err) => {
         alert("Invalid Username or Password");
-        console.log('HTTP Error', err)
+        //('HTTP Error', err)
       }
       )
     }

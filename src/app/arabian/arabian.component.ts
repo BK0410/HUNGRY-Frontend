@@ -18,15 +18,15 @@ export class ArabianComponent implements OnInit {
   ngOnInit(): void {
     var token:any = localStorage.getItem('token');
     var base64Payload = token.split('.')[1];
-    console.log(base64Payload)
+    //.log(base64Payload)
     var payload1:any = Buffer.from(base64Payload, 'base64');
-    console.log(JSON.parse(payload1))
+    //.log(JSON.parse(payload1))
     if(JSON.parse(payload1).role === "ADMIN"){
       this.router.navigate(['not-found'])
     }
     
     this.userSer.getFoodTable().subscribe((res) => {
-      console.log(res, "res==>");
+      //.log(res, "res==>");
       this.categories = res
     })
 
@@ -45,12 +45,12 @@ export class ArabianComponent implements OnInit {
     this.count = this.count + 1;
     this.userSer.getSingleUser().subscribe((res) => {
       var cart = new Map<string, any>();
-      console.log(cart)
-      console.log(res, "res==>");
+      //.log(cart)
+      //.log(res, "res==>");
       for (let value in res.cart) {
         cart.set(value, res.cart[value])
       }
-      console.log(cart)
+      //.log(cart)
 
 
       if (cart.has(dish)) {
@@ -60,9 +60,9 @@ export class ArabianComponent implements OnInit {
       }
       else {
         cart.set(dish, [1, price, restaurant])
-        console.log("new obj")
+        //.log("new obj")
       }
-      console.log(cart)
+      //.log(cart)
       let jsonObject: any = {};
       cart.forEach((value: any, key: any) => {
         jsonObject[key] = value

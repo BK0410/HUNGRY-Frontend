@@ -35,7 +35,6 @@ export class TestComponent implements OnInit {
   
     ngOnInit(): void {
       this.userSer.getFoodTable().subscribe((res) => {
-        console.log(res, "res==>");
         this.categories = res
       })
     }

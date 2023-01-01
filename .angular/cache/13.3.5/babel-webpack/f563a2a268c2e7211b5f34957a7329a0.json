@@ -1,0 +1,1 @@
+{"ast":null,"code":"export let model = /*#__PURE__*/(() => {\n  class model {}\n\n  model.ip = \"http://52.70.141.211:9000\";\n  return model;\n})();","map":null,"metadata":{},"sourceType":"module"}

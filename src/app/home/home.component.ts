@@ -19,7 +19,5 @@ export class HomeComponent implements OnInit {
   }
 
   fn(){
-    console.log("BARATH")
-    console.log(this.menudisplay)
   }
 }
